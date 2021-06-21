@@ -38,7 +38,6 @@ export default {
 
 <style lang="scss">
 .welcome {
-  // text-align: center;
   padding: 30px 10px;
 
   .header {
@@ -81,6 +80,7 @@ form {
     color: #5ae4ca;
     padding: 0;
     border-radius: 0;
+    outline: none;
     border-bottom: 1px solid #5ae4ca;
   }
 }

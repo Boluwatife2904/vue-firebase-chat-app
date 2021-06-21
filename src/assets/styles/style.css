@@ -17,7 +17,7 @@ body {
 }
 
 .container {
-  width: 95%;
+  width: 92%;
   max-width: 960px;
   margin: 80px auto;
   border-radius: 6px;
@@ -28,6 +28,8 @@ body {
 .error {
   color: #ff3f80;
   font-size: 14px;
+  text-align: center;
+  margin: 10px 0;
 }
 
 button {
@@ -39,4 +41,5 @@ button {
   padding: 10px 20px;
   cursor: pointer;
   font: inherit;
+  outline: none;
 }
