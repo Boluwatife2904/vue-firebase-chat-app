@@ -22,7 +22,10 @@
         v-model.trim="password"
       />
     </div>
-    <button type="submit">Sign up</button>
+    <button type="submit">
+      <i class="bx bx-loader bx-spin bx-flip-horizontal" v-if="isLoading"></i>
+      <span v-else>Signup</span>
+    </button>
     <div v-if="error">
       <p class="error">{{ error }}</p>
     </div>
@@ -36,7 +39,7 @@ import signupAction from "../composables/signupAction";
 export default {
   name: "SignupForm",
   setup() {
-    const { error, signup } = signupAction();
+    const { error, signup, isLoading } = signupAction();
     const displayName = ref("");
     const password = ref("");
     const email = ref("");
@@ -50,7 +53,7 @@ export default {
       }
     };
 
-    return { displayName, email, password, submitForm, error };
+    return { displayName, email, password, submitForm, error, isLoading };
   },
 };
 </script>
