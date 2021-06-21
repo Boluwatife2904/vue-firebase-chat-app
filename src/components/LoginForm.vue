@@ -28,7 +28,8 @@ import { ref } from "vue";
 import loginAction from "../composables/loginaAction";
 export default {
   name: "LoginForm",
-  setup() {
+  emits: ["proceed-to-chatroom"],
+  setup(_, context) {
     const { error, isLoading, login } = loginAction();
     const email = ref("");
     const password = ref("");
@@ -38,6 +39,7 @@ export default {
       if (!error.value) {
         email.value = "";
         password.value = "";
+        context.emit("proceed-to-chatroom");
       }
     };
 

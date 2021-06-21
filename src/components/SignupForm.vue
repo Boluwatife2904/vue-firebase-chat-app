@@ -38,7 +38,8 @@ import signupAction from "../composables/signupAction";
 
 export default {
   name: "SignupForm",
-  setup() {
+  emits: ["proceed-to-chatroom"],
+  setup(_, context) {
     const { error, signup, isLoading } = signupAction();
     const displayName = ref("");
     const password = ref("");
@@ -50,6 +51,7 @@ export default {
         displayName.value = "";
         password.value = "";
         email.value = "";
+        context.emit("proceed-to-chatroom")
       }
     };
 

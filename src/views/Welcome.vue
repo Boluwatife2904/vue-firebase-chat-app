@@ -3,8 +3,8 @@
     <h2 class="header">
       {{ !loginMode ? "Signup" : "Login"}}
     </h2>
-    <LoginForm v-if="loginMode" />
-    <SignupForm v-else />
+    <LoginForm v-if="loginMode" @proceed-to-chatroom="proceedToChatroom"/>
+    <SignupForm v-else @proceed-to-chatroom="proceedToChatroom" />
     <div class="mode-switcher">
       <p>
         {{ loginMode ? "Don't have an account?" : "Already have an account?" }}
@@ -19,19 +19,25 @@
 
 <script>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import LoginForm from "../components/LoginForm.vue";
 import SignupForm from "../components/SignupForm.vue";
 export default {
   components: { SignupForm, LoginForm },
   name: "Welcome",
   setup() {
+    const router = useRouter();
     const loginMode = ref(true);
 
     const toggleMode = () => {
       loginMode.value = !loginMode.value;
     };
 
-    return { loginMode, toggleMode };
+    const proceedToChatroom = () => {
+      router.replace({ name: "Chatroom"})
+    }
+
+    return { loginMode, toggleMode, proceedToChatroom };
   },
 };
 </script>
