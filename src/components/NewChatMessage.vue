@@ -1,14 +1,17 @@
 <template>
-  <form>
-    <user-avatar :name="username"></user-avatar>
+  <form @submit.prevent="sendMessage">
     <input
       type="text"
       name="message"
       id="message"
-      placeholder="Type a message and hit enter to send..."
+      placeholder="Type a message..."
       v-model.trim="text"
       @keypress.enter.prevent="sendMessage"
     />
+    <button type="submit" class="send-message" :disabled="text.length <= 0">
+      <span>Send</span>
+      <i class="bx bxs-send"></i>
+    </button>
   </form>
 </template>
 
@@ -49,7 +52,7 @@ export default {
 form {
   width: 100%;
   max-width: 100%;
-  padding: 20px 10px;
+  padding: 20px;
   display: flex;
   align-items: center;
   margin-bottom: 0;
@@ -62,6 +65,25 @@ form {
     outline: none;
     border: none;
     color: rgb(73, 73, 73);
+    padding-right: 30px;
+  }
+
+  button {
+    background: #5d7cf3;
+    color: #fff;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all .3s linear;
+
+    &:disabled {
+      background: rgb(196, 196, 196);
+      color: #555;
+      cursor: not-allowed;
+    }
+
+    span {
+      margin-right: 4px;
+    }
   }
 }
 </style>

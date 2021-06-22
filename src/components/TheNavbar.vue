@@ -4,7 +4,7 @@
       <p>Welcome back, {{ user.displayName }}</p>
       <p class="email">Email - {{ user.email }}</p>
     </div>
-    <button class="logout" @click="logoutUser">Logout</button>
+    <button class="logout" @click="logoutUser"><i class='bx bx-power-off bx-tada' style='color:#ffffff' ></i></button>
   </nav>
 </template>
 
@@ -45,6 +45,12 @@ nav {
   .email {
     font-size: 14px;
     color: #999;
+  }
+
+  button {
+    border-radius: 6px;
+    font-size: 20px;
+    background: #5d7cf3;
   }
 }
 </style>
