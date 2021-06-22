@@ -83,11 +83,11 @@ form {
 
   button {
     background: transparent;
-    color: #5ae4ca;
+    color: #5d7cf3;
     padding: 0;
     border-radius: 0;
     outline: none;
-    border-bottom: 1px solid #5ae4ca;
+    border-bottom: 1px solid #5d7cf3;
   }
 }
 </style>
