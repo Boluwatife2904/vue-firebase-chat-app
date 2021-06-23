@@ -5,12 +5,14 @@
     </div>
     <div v-if="isLoading">loading</div>
     <div class="empty" v-else-if="!isLoading && documents.length === 0">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. A atque ex
-      molestias libero doloribus, impedit excepturi doloremque labore porro!
-      Odit officiis tempore exercitationem corrupti, eveniet dolores! Sequi
-      veritatis ducimus doloribus voluptatem iusto harum praesentium quod
-      minima! Aperiam ea dicta molestiae atque eligendi reiciendis mollitia
-      rerum, accusantium sint numquam! Dignissimos, magnam.
+      <img
+        src="../assets/images/nothing.webp"
+        alt="nothing to see here image"
+      />
+      <p>
+        Uhmmmmm <span>&#128549;</span>... It seems like the are no messages
+        here yet. Be the first to drop a message <span>&#128521;</span>.
+      </p>
     </div>
     <div v-else-if="!isLoading && documents" class="messages">
       <div
@@ -136,6 +138,24 @@ export default {
         border-bottom: 10px solid #5c62f2;
       }
     }
+  }
+}
+
+.empty {
+  max-width: 450px;
+  width: 90%;
+  margin: auto;
+
+  img {
+    height: 300px;
+    margin: 30px auto;
+    display: block;
+    mix-blend-mode: multiply;
+  }
+
+  p {
+    line-height: 30px;
+    text-align: center;
   }
 }
 </style>
