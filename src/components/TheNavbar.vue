@@ -31,11 +31,14 @@ export default {
 
 <style lang="scss" scoped>
 nav {
+  flex: 0 0 100px;
+  max-height: 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
   border-bottom: 1px solid #eee;
+  background: rgb(246, 251, 255);
 
   p {
     margin: 5px auto;

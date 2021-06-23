@@ -1,9 +1,9 @@
 <template>
   <div class="welcome container">
     <h2 class="header">
-      {{ !loginMode ? "Signup" : "Login"}}
+      {{ !loginMode ? "Signup" : "Login" }}
     </h2>
-    <LoginForm v-if="loginMode" @proceed-to-chatroom="proceedToChatroom"/>
+    <LoginForm v-if="loginMode" @proceed-to-chatroom="proceedToChatroom" />
     <SignupForm v-else @proceed-to-chatroom="proceedToChatroom" />
     <div class="mode-switcher">
       <p>
@@ -34,8 +34,8 @@ export default {
     };
 
     const proceedToChatroom = () => {
-      router.replace({ name: "Chatroom"})
-    }
+      router.replace({ name: "Chatroom", params: { room: "general" } });
+    };
 
     return { loginMode, toggleMode, proceedToChatroom };
   },

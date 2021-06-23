@@ -16,19 +16,20 @@ body {
   color: #444;  
 }
 
-#app {
+/* #app {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
   width: 100vw;
-}
+} */
 
 .container {
-  max-width: 960px;
-  width: 92%;
-  border-radius: 6px;
-  box-shadow: 2px 4px 6px rgba(28, 6, 49, 0.1);
+  /* max-width: 960px; */
+  height: 100vh;
+  width: 100vw;
+  /* border-radius: 6px;
+  box-shadow: 2px 4px 6px rgba(28, 6, 49, 0.1); */
   background: #fff;
 }
 

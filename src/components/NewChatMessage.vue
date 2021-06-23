@@ -17,6 +17,7 @@
 
 <script>
 import { ref, computed } from "vue";
+import { useRoute } from "vue-router";
 import getUser from "../composables/getCurrentUser";
 import useCollection from "../composables/useCollection";
 import { timestamp } from "../firebase/config";
@@ -26,6 +27,7 @@ export default {
   components: { UserAvatar },
   name: "NewChatMessage",
   setup() {
+    const route = useRoute();
     const { user } = getUser();
     const { error, addDocument } = useCollection("messages");
     const text = ref("");
@@ -34,6 +36,7 @@ export default {
         const chat = {
           message: text.value,
           sender: user.value.displayName,
+          room: route.params.room,
           createdAt: timestamp(),
         };
         await addDocument(chat);
@@ -50,6 +53,9 @@ export default {
 
 <style lang="scss" scoped>
 form {
+  flex: 0 0 80px;
+  max-height: 80px;
+  background: #fff;
   width: 100%;
   max-width: 100%;
   padding: 20px;
@@ -60,10 +66,12 @@ form {
   input {
     width: 100%;
     max-width: 100%;
+    height: 100%;
     font: inherit;
     padding: 0;
     outline: none;
     border: none;
+    background: none;
     color: rgb(73, 73, 73);
     padding-right: 30px;
   }
@@ -73,7 +81,7 @@ form {
     color: #fff;
     border-radius: 6px;
     font-weight: 500;
-    transition: all .3s linear;
+    transition: all 0.3s linear;
 
     &:disabled {
       background: rgb(196, 196, 196);

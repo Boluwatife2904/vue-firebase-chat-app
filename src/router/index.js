@@ -19,9 +19,10 @@ const routes = [
     component: Welcome
   }, 
   {
-    path: "/chatroom",
+    path: "/chatroom/:room",
     name: "Chatroom",
     component: Chatroom,
+    props: true,
     beforeEnter: requiresAuthentication
   }
 ]

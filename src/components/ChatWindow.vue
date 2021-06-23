@@ -1,53 +1,57 @@
 <template>
-  <div class="chat-window">
+  <div class="chat-window" ref="messagesContainer">
     <div v-if="error">
       {{ error }}
     </div>
-    <div v-if="formattedDocuments" class="messages" ref="messagesContainer">
+    <div v-if="isLoading">loading</div>
+    <div class="empty" v-else-if="!isLoading && documents.length === 0">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. A atque ex
+      molestias libero doloribus, impedit excepturi doloremque labore porro!
+      Odit officiis tempore exercitationem corrupti, eveniet dolores! Sequi
+      veritatis ducimus doloribus voluptatem iusto harum praesentium quod
+      minima! Aperiam ea dicta molestiae atque eligendi reiciendis mollitia
+      rerum, accusantium sint numquam! Dignissimos, magnam.
+    </div>
+    <div v-else-if="!isLoading && documents" class="messages">
       <div
         class="message"
         :class="[document.sender === user.displayName ? 'sender' : 'receiver']"
-        v-for="document in formattedDocuments"
+        v-for="document in documents"
         :key="document.id"
       >
         <span class="text">{{ document.message }}</span>
         <span class="created-at">{{ document.createdAt }}</span>
-        <span class="name" v-if="document.sender !== user.displayName ">{{
+        <span class="name" v-if="document.sender !== user.displayName">{{
           document.sender
         }}</span>
       </div>
     </div>
-    <div class="loading" v-else>loading</div>
+    <!-- <div class="loading" v-else-if="!documents">nothing to see here</div> -->
+    <!-- <div v-else-if="documents.length === 0">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. A atque ex
+      molestias libero doloribus, impedit excepturi doloremque labore porro!
+      Odit officiis tempore exercitationem corrupti, eveniet dolores! Sequi
+      veritatis ducimus doloribus voluptatem iusto harum praesentium quod
+      minima! Aperiam ea dicta molestiae atque eligendi reiciendis mollitia
+      rerum, accusantium sint numquam! Dignissimos, magnam.
+    </div> -->
   </div>
 </template>
 
 <script>
-import { onUpdated, ref, computed } from "vue";
-import { formatDistanceToNow } from "date-fns";
-import getCollection from "../composables/getCollection";
-import getCurrentUser from '../composables/getCurrentUser';
+import { onUpdated, ref } from "vue";
+import getCurrentUser from "../composables/getCurrentUser";
 
 export default {
   name: "ChatWindow",
+  props: ["documents", "error", "isLoading"],
   setup() {
-    const { error, documents } = getCollection("messages");
     const messagesContainer = ref(null);
     const { user } = getCurrentUser();
-
-    const formattedDocuments = computed(() => {
-      if (documents.value) {
-        return documents.value.map((document) => {
-          let time = formatDistanceToNow(document.createdAt.toDate());
-          return { ...document, createdAt: time };
-        });
-      }
-    });
-
     onUpdated(() => {
       messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight;
     });
-
-    return { error, formattedDocuments, messagesContainer, user };
+    return { messagesContainer, user };
   },
 };
 </script>
@@ -56,14 +60,20 @@ export default {
 .chat-window {
   width: 100%;
   max-width: 100%;
+  flex: 1;
+  // background: #000;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  background: #f2f6fe;
 
   .messages {
     padding: 30px 20px;
     background: #f2f6fe;
-    height: 450px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
+    height: 100%;
+    // overflow-y: auto;
+    // overflow-x: hidden;
+    // scroll-behavior: smooth;
 
     .message {
       margin: 18px 0;
