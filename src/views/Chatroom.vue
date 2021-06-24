@@ -5,7 +5,11 @@
     </div>
     <div class="main-container">
       <TheNavbar />
-      <ChatWindow :documents="formattedDocuments" :error="error" :isLoading="isLoading" />
+      <ChatWindow
+        :documents="formattedDocuments"
+        :error="error"
+        :isLoading="isLoading"
+      />
       <NewChatMessage />
     </div>
   </div>
@@ -56,6 +60,22 @@ export default {
   .sidebar-content {
     flex: 0 0 20%;
     max-width: 20%;
+    overflow-y: auto;
+
+    @media screen and (max-width: 994px) {
+      flex: 0 0 10%;
+      max-width: 10%;
+    }
+
+    @media screen and (max-width: 576px) {
+      flex: 0 0 100%;
+      max-width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      display: none;
+    }
   }
 
   .main-container {
@@ -64,6 +84,16 @@ export default {
 
     display: flex;
     flex-direction: column;
+
+    @media screen and (max-width: 994px) {
+      flex: 0 0 90%;
+      max-width: 90%;
+    }
+
+    @media screen and (max-width: 576px) {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
   }
 }
 </style>

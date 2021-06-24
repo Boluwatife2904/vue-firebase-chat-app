@@ -10,7 +10,7 @@
         alt="nothing to see here image"
       />
       <p>
-        Uhmmmmm <span>&#128549;</span>... It seems like the are no messages
+        Uhmmmmm <span>&#128549;</span>... It seems like there are no messages
         here yet. Be the first to drop a message <span>&#128521;</span>.
       </p>
     </div>
@@ -28,15 +28,6 @@
         }}</span>
       </div>
     </div>
-    <!-- <div class="loading" v-else-if="!documents">nothing to see here</div> -->
-    <!-- <div v-else-if="documents.length === 0">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. A atque ex
-      molestias libero doloribus, impedit excepturi doloremque labore porro!
-      Odit officiis tempore exercitationem corrupti, eveniet dolores! Sequi
-      veritatis ducimus doloribus voluptatem iusto harum praesentium quod
-      minima! Aperiam ea dicta molestiae atque eligendi reiciendis mollitia
-      rerum, accusantium sint numquam! Dignissimos, magnam.
-    </div> -->
   </div>
 </template>
 
@@ -63,7 +54,6 @@ export default {
   width: 100%;
   max-width: 100%;
   flex: 1;
-  // background: #000;
   overflow-y: auto;
   overflow-x: hidden;
   scroll-behavior: smooth;
@@ -147,7 +137,8 @@ export default {
   margin: auto;
 
   img {
-    height: 300px;
+    height: 260px;
+    max-width: 100%;
     margin: 30px auto;
     display: block;
     mix-blend-mode: multiply;
