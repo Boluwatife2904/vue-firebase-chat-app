@@ -9,8 +9,12 @@
       @keypress.enter.prevent="sendMessage"
     />
     <button type="submit" class="send-message" :disabled="text.length <= 0">
-      <span>Send</span>
-      <i class="bx bxs-send"></i>
+      <span v-if="isLoading">
+        <i class="bx bx-loader bx-spin bx-flip-horizontal"></i>
+      </span>
+      <span v-else>
+        <i class="bx bx-mail-send"></i>
+      </span>
     </button>
   </form>
 </template>
@@ -29,7 +33,7 @@ export default {
   setup() {
     const route = useRoute();
     const { user } = getUser();
-    const { error, addDocument } = useCollection("messages");
+    const { error, addDocument, isLoading } = useCollection("messages");
     const text = ref("");
     const sendMessage = async () => {
       if (text.value !== "") {
@@ -46,7 +50,7 @@ export default {
       }
     };
     const username = computed(() => user.value.displayName);
-    return { text, sendMessage, username, error };
+    return { text, sendMessage, username, error, isLoading };
   },
 };
 </script>
@@ -73,7 +77,7 @@ form {
     border: none;
     background: none;
     color: rgb(73, 73, 73);
-    padding-right: 30px;
+    padding-right: 20px;
   }
 
   button {
@@ -82,6 +86,14 @@ form {
     border-radius: 6px;
     font-weight: 500;
     transition: all 0.3s linear;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i {
+      font-size: 18px;
+    }
 
     &:disabled {
       background: rgb(196, 196, 196);

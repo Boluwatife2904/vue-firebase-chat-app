@@ -6,7 +6,7 @@
     <div class="loading-component" v-if="isLoading">
       <message-loader v-for="number in 6" :key="number"></message-loader>
     </div>
-    <EmptyScreen v-else-if="!isLoading && documents.length === 0"/>
+    <EmptyScreen v-else-if="!isLoading && documents.length === 0" />
     <div v-else-if="!isLoading && documents" class="messages">
       <div
         class="message"
@@ -19,6 +19,13 @@
         <span class="name" v-if="document.sender !== user.displayName">{{
           document.sender
         }}</span>
+        <button
+          class="delete"
+          @click="deleteDocument(document.id)"
+          v-if="document.sender === user.displayName"
+        >
+          <i class="bx bx-trash"></i>
+        </button>
       </div>
     </div>
   </div>
@@ -29,6 +36,7 @@ import { onUpdated, ref } from "vue";
 import MessageLoader from "../components/MessageLoader.vue";
 import EmptyScreen from "../components/EmptyScreen.vue";
 import getCurrentUser from "../composables/getCurrentUser";
+import useCollection from "../composables/useCollection";
 
 export default {
   name: "ChatWindow",
@@ -37,10 +45,11 @@ export default {
   setup() {
     const messagesContainer = ref(null);
     const { user } = getCurrentUser();
+    const { deleteDocument } = useCollection("messages");
     onUpdated(() => {
       messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight;
     });
-    return { messagesContainer, user };
+    return { messagesContainer, user, deleteDocument };
   },
 };
 </script>
@@ -65,7 +74,7 @@ export default {
       border-radius: 5px;
       width: 100%;
       font-size: 15px;
-      padding: 15px 20px 40px;
+      padding: 25px 20px 40px;
       border: none;
       max-width: 450px;
       position: relative;
@@ -122,6 +131,21 @@ export default {
       }
     }
   }
+}
+
+.delete {
+  background: none;
+  color: #fff;
+  font-weight: bold;
+  border: 0;
+  border-radius: 0;
+  padding: 10px;
+  cursor: pointer;
+  font: inherit;
+  outline: none;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .loading-component {

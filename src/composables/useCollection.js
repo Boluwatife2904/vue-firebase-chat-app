@@ -3,16 +3,27 @@ import { projectFirestore } from "../firebase/config";
 
 const useCollection = (collection) => {
   const error = ref(null);
+  const isLoading = ref(false);
 
-  const addDocument = (document) => {
+  const addDocument = async (document) => {
+    isLoading.value = true;
     error.value = null;
     try {
-      projectFirestore.collection(collection).add(document);
+      await projectFirestore.collection(collection).add(document);
+      isLoading.value = false;
     } catch (err) {
       error.value = err.message;
     }
   };
-  return { error, addDocument };
+
+  const deleteDocument = async (id) => {
+    await projectFirestore
+      .collection(collection)
+      .doc(id)
+      .delete();
+  };
+
+  return { error, addDocument, deleteDocument, isLoading };
 };
 
 export default useCollection;
