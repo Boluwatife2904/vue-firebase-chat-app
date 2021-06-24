@@ -3,17 +3,10 @@
     <div v-if="error">
       {{ error }}
     </div>
-    <div v-if="isLoading">loading</div>
-    <div class="empty" v-else-if="!isLoading && documents.length === 0">
-      <img
-        src="../assets/images/nothing.webp"
-        alt="nothing to see here image"
-      />
-      <p>
-        Uhmmmmm <span>&#128549;</span>... It seems like there are no messages
-        here yet. Be the first to drop a message <span>&#128521;</span>.
-      </p>
+    <div class="loading-component" v-if="isLoading">
+      <message-loader v-for="number in 6" :key="number"></message-loader>
     </div>
+    <EmptyScreen v-else-if="!isLoading && documents.length === 0"/>
     <div v-else-if="!isLoading && documents" class="messages">
       <div
         class="message"
@@ -33,10 +26,13 @@
 
 <script>
 import { onUpdated, ref } from "vue";
+import MessageLoader from "../components/MessageLoader.vue";
+import EmptyScreen from "../components/EmptyScreen.vue";
 import getCurrentUser from "../composables/getCurrentUser";
 
 export default {
   name: "ChatWindow",
+  components: { MessageLoader, EmptyScreen },
   props: ["documents", "error", "isLoading"],
   setup() {
     const messagesContainer = ref(null);
@@ -63,9 +59,6 @@ export default {
     padding: 30px 20px;
     background: #f2f6fe;
     height: 100%;
-    // overflow-y: auto;
-    // overflow-x: hidden;
-    // scroll-behavior: smooth;
 
     .message {
       margin: 18px 0;
@@ -131,22 +124,7 @@ export default {
   }
 }
 
-.empty {
-  max-width: 450px;
-  width: 90%;
-  margin: auto;
-
-  img {
-    height: 260px;
-    max-width: 100%;
-    margin: 30px auto;
-    display: block;
-    mix-blend-mode: multiply;
-  }
-
-  p {
-    line-height: 30px;
-    text-align: center;
-  }
+.loading-component {
+  padding: 30px 20px;
 }
 </style>
