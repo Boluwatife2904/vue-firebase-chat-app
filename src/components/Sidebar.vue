@@ -72,13 +72,8 @@
 </template>
 
 <script>
-import getCollection from "../composables/getCollection";
 export default {
   name: "Sidebar",
-  setup() {
-    const { rooms } = getCollection("messages");
-    return { rooms };
-  },
 };
 </script>
 

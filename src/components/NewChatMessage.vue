@@ -20,15 +20,13 @@
 </template>
 
 <script>
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { useRoute } from "vue-router";
 import getUser from "../composables/getCurrentUser";
 import useCollection from "../composables/useCollection";
 import { timestamp } from "../firebase/config";
-import UserAvatar from "./UserAvatar.vue";
 
 export default {
-  components: { UserAvatar },
   name: "NewChatMessage",
   setup() {
     const route = useRoute();
@@ -49,8 +47,7 @@ export default {
         text.value = "";
       }
     };
-    const username = computed(() => user.value.displayName);
-    return { text, sendMessage, username, error, isLoading };
+    return { text, sendMessage, error, isLoading };
   },
 };
 </script>
