@@ -112,6 +112,7 @@ export default {
         color: rgb(150, 150, 150);
         display: block;
         border-radius: 4px;
+        transition: all 0.3s linear;
 
         @media screen and (max-width: 994px) {
           text-align: center;

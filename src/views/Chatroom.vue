@@ -61,6 +61,7 @@ export default {
     flex: 0 0 20%;
     max-width: 20%;
     overflow-y: auto;
+    transition: all 0.3s linear;
 
     @media screen and (max-width: 994px) {
       flex: 0 0 10%;
@@ -81,6 +82,7 @@ export default {
   .main-container {
     flex: 0 0 80%;
     max-width: 80%;
+    transition: all 0.3s linear;
 
     display: flex;
     flex-direction: column;
