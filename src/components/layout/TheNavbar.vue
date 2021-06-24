@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import logoutAction from "../composables/logoutAction";
-import getCurrentUser from "../composables/getCurrentUser";
+import logoutAction from "@/composables/logoutAction";
+import getCurrentUser from "@/composables/getCurrentUser";
 export default {
   name: "TheNavbar",
   setup() {

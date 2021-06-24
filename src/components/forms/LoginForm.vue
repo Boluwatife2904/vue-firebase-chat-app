@@ -25,7 +25,7 @@
 
 <script>
 import { ref } from "vue";
-import loginAction from "../composables/loginaAction";
+import loginAction from "@/composables/loginaAction";
 export default {
   name: "LoginForm",
   emits: ["proceed-to-chatroom"],

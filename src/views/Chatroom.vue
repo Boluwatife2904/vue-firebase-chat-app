@@ -19,10 +19,10 @@
 import { useRouter } from "vue-router";
 import { watch, computed } from "vue";
 import getCurrentUser from "../composables/getCurrentUser";
-import TheNavbar from "../components/TheNavbar.vue";
-import Sidebar from "../components/Sidebar.vue";
-import NewChatMessage from "../components/NewChatMessage.vue";
-import ChatWindow from "../components/ChatWindow.vue";
+import TheNavbar from "../components/layout/TheNavbar.vue";
+import Sidebar from "../components/layout/Sidebar.vue";
+import NewChatMessage from "../components/chat/NewChatMessage.vue";
+import ChatWindow from "../components/chat/ChatWindow.vue";
 import getCollection from "../composables/getCollection";
 
 export default {

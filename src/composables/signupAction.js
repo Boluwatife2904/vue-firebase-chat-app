@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { projectAuth } from "../firebase/config";
+import { projectAuth } from "@/firebase/config";
 
 const error = ref(null);
 const isLoading = ref(false);

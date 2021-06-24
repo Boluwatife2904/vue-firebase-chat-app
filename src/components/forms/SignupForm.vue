@@ -34,7 +34,7 @@
 
 <script>
 import { ref } from "vue";
-import signupAction from "../composables/signupAction";
+import signupAction from "@/composables/signupAction";
 
 export default {
   name: "SignupForm",

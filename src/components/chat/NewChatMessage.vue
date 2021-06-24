@@ -22,9 +22,9 @@
 <script>
 import { ref } from "vue";
 import { useRoute } from "vue-router";
-import getUser from "../composables/getCurrentUser";
-import useCollection from "../composables/useCollection";
-import { timestamp } from "../firebase/config";
+import getUser from "@/composables/getCurrentUser";
+import useCollection from "@/composables/useCollection";
+import { timestamp } from "@/firebase/config";
 
 export default {
   name: "NewChatMessage",

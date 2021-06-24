@@ -1,7 +1,7 @@
 <template>
    <div class="empty">
       <img
-        src="../assets/images/nothing.webp"
+        src="../../assets/images/nothing.webp"
         alt="nothing to see here image"
       />
       <p>
