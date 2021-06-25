@@ -39,7 +39,7 @@ export default {
   border-radius: 5px;
   width: 100%;
   font-size: 15px;
-  padding: 25px 20px 40px;
+  padding: 15px 20px 40px;
   border: none;
   max-width: 450px;
   position: relative;
@@ -100,7 +100,8 @@ export default {
 }
 
 .sender {
-  background: linear-gradient(#5b92f2, #5c62f2);
+  background: #5c62f2;
+  padding-top: 25px;
   margin-left: auto;
   color: #fff;
 

@@ -2,9 +2,13 @@
   <nav v-if="user">
     <div class="user-information">
       <p>Welcome back, {{ user.displayName }}</p>
-      <p class="email">Email - {{ user.email }}</p>
+      <button class="logout" @click="logoutUser">
+        <i class="bx bx-log-out"></i>Logout
+      </button>
     </div>
-    <button class="logout" @click="logoutUser"><i class='bx bx-power-off bx-tada' style='color:#ffffff' ></i></button>
+    <button @click="toggleSidebar" class="toggler">
+      <i class="bx bx-menu"></i>
+    </button>
   </nav>
 </template>
 
@@ -13,18 +17,18 @@ import logoutAction from "@/composables/logoutAction";
 import getCurrentUser from "@/composables/getCurrentUser";
 export default {
   name: "TheNavbar",
-  setup() {
+  emits: ["toggle-sidebar"],
+  setup(_, context) {
     const { error, logout } = logoutAction();
     const { user } = getCurrentUser();
 
-    const logoutUser = async () => {
-      await logout();
-      if (!error.value) {
-        console.log("Logging user out...");
-      }
+    const logoutUser = async () => { await logout() };
+
+    const toggleSidebar = () => {
+      context.emit("toggle-sidebar");
     };
 
-    return { error, logout, logoutUser, user };
+    return { error, logout, logoutUser, user, toggleSidebar };
   },
 };
 </script>
@@ -45,15 +49,29 @@ nav {
     color: #444;
   }
 
-  .email {
-    font-size: 14px;
-    color: #999;
+  .logout {
+    background: none;
+    color: #777;
+    padding: 4px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    i {
+      padding-right: 4px;
+    }
   }
 
-  button {
+  .toggler {
     border-radius: 6px;
     font-size: 20px;
-    background: #5d7cf3;
+    background: none;
+    font-size: 30px;
+    display: none;
+
+    @media screen and (max-width: 576px) {
+      display: block;
+    }
   }
 }
 </style>

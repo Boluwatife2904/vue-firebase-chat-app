@@ -1,7 +1,7 @@
 <template>
   <div class="welcome container">
     <h2 class="header">
-      {{ !loginMode ? "Signup" : "Login" }}
+      {{ loginMode ? "Login" : "Signup" }}
     </h2>
     <LoginForm v-if="loginMode" @proceed-to-chatroom="proceedToChatroom" />
     <SignupForm v-else @proceed-to-chatroom="proceedToChatroom" />
@@ -42,7 +42,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .welcome {
   padding: 30px 10px;
 
@@ -53,41 +53,17 @@ export default {
   }
 }
 
-form {
-  max-width: 450px;
-  width: 95%;
-  margin: 0 auto 40px;
-
-  .form-control {
-    margin-bottom: 20px;
-
-    label {
-      display: block;
-      margin: 0 0 8px;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px 14px;
-      font: inherit;
-      border-radius: 6px;
-      border: 1px solid rgb(220, 220, 220);
-      outline: none;
-      color: #999;
-    }
-  }
-}
 
 .mode-switcher {
   text-align: center;
 
   button {
     background: transparent;
-    color: #5d7cf3;
+    color: #5c62f2;
     padding: 0;
     border-radius: 0;
     outline: none;
-    border-bottom: 1px solid #5d7cf3;
+    border-bottom: 1px solid #5c62f2;
   }
 }
 </style>

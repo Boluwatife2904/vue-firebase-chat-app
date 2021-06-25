@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submitForm">
+  <form @submit.prevent="submitForm" class="auth-form">
     <div class="form-control">
       <label for="email">Email address</label>
       <input type="email" name="email" id="email" v-model.trim="email" />
@@ -54,6 +54,10 @@ form {
     width: 100px;
     height: 40px;
     padding: 0;
+    background: #5c62f2;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;

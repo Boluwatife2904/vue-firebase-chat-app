@@ -1,10 +1,10 @@
 <template>
   <div class="page-wrapper">
-    <div class="sidebar-content">
+    <div class="sidebar-content" :class="{'open': sidebarIsOpen}">
       <Sidebar />
     </div>
     <div class="main-container">
-      <TheNavbar />
+      <TheNavbar @toggle-sidebar="toggleSidebar" />
       <ChatWindow
         :documents="formattedDocuments"
         :error="error"
@@ -17,7 +17,7 @@
 
 <script>
 import { useRouter } from "vue-router";
-import { watch, computed } from "vue";
+import { ref, watch, computed } from "vue";
 import getCurrentUser from "../composables/getCurrentUser";
 import TheNavbar from "../components/layout/TheNavbar.vue";
 import Sidebar from "../components/layout/Sidebar.vue";
@@ -29,6 +29,7 @@ export default {
   components: { TheNavbar, NewChatMessage, ChatWindow, Sidebar },
   props: ["room"],
   setup(props) {
+    const sidebarIsOpen = ref(false);
     const { error, documents, isLoading } = getCollection("messages");
     const router = useRouter();
     const { user } = getCurrentUser();
@@ -46,7 +47,9 @@ export default {
       }
     });
 
-    return { error, isLoading, formattedDocuments };
+    const toggleSidebar = () => { sidebarIsOpen.value = !sidebarIsOpen.value }
+
+    return { error, isLoading, formattedDocuments, sidebarIsOpen, toggleSidebar };
   },
 };
 </script>
@@ -61,7 +64,7 @@ export default {
     flex: 0 0 20%;
     max-width: 20%;
     overflow-y: auto;
-    transition: all 0.3s linear;
+    // transition: all 0.3s linear;
 
     @media screen and (max-width: 994px) {
       flex: 0 0 10%;
@@ -73,9 +76,13 @@ export default {
       max-width: 100%;
       position: fixed;
       top: 0;
-      left: 0;
+      left: -100px;
       z-index: 999;
-      display: none;
+      transition: all .3s linear;
+    }
+
+    &.open {
+      left: 0;
     }
   }
 

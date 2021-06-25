@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700&display=swap");
 
 * {
   margin: 0;
@@ -11,7 +11,7 @@ html {
 }
 
 body {
-  font-family: 'Karla', sans-serif;
+  font-family: "Karla", sans-serif;
 }
 
 .container {
@@ -20,21 +20,45 @@ body {
   background: #fff;
 }
 
+/* ERROR TEXT */
 .error {
   color: #ff3f80;
   font-size: 14px;
   text-align: center;
   margin: 10px 0;
 }
+/* END ERROR TEST */
+
+/* LOGIN ANF SIGNUP FORM */
+.auth-form {
+  max-width: 450px;
+  width: 95%;
+  margin: 0 auto 40px;
+}
+
+.auth-form .form-control {
+  margin-bottom: 20px;
+}
+
+.auth-form .form-control label {
+  display: block;
+  margin: 0 0 8px;
+}
+
+.auth-form .form-control input {
+  width: 100%;
+  padding: 12px 14px;
+  font: inherit;
+  border-radius: 6px;
+  border: 1px solid rgb(220, 220, 220);
+  outline: none;
+  color: #999;
+}
+/* END LOGIN AND SIGNUP FORM */
 
 button {
-  background: #5d7cf3;
-  color: #fff;
-  font-weight: bold;
-  border: 0;
-  border-radius: 20px;
-  padding: 10px 20px;
-  cursor: pointer;
-  font: inherit;
   outline: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
 }

@@ -62,7 +62,6 @@ form {
   padding: 20px;
   display: flex;
   align-items: center;
-  margin-bottom: 0;
 
   input {
     width: 100%;
@@ -78,7 +77,7 @@ form {
   }
 
   button {
-    background: #5d7cf3;
+    background: #5c62f2;
     color: #fff;
     border-radius: 6px;
     font-weight: 500;

@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submitForm">
+  <form @submit.prevent="submitForm" class="auth-form">
     <div class="form-control">
       <label for="display">Display Name</label>
       <input
