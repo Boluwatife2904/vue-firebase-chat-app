@@ -1,6 +1,6 @@
 <template>
   <div class="page-wrapper">
-    <div class="sidebar-content" :class="{'open': sidebarIsOpen}">
+    <div class="sidebar-content" :class="{ open: sidebarIsOpen }">
       <Sidebar />
     </div>
     <div class="main-container">
@@ -27,18 +27,39 @@ import getCollection from "../composables/getCollection";
 
 export default {
   components: { TheNavbar, NewChatMessage, ChatWindow, Sidebar },
-  props: ["room"],
+  props: {
+    room: {
+      type: String,
+      required: true,
+      default: "general",
+    },
+  },
   setup(props) {
+    const router = useRouter();
+    const rooms = [
+      "general",
+      "introductions",
+      "lifestyle",
+      "gist",
+      "music",
+      "technology",
+      "fashion",
+      "love",
+      "football",
+      "crypto",
+      "eighteen",
+    ];
+    if (rooms.indexOf(props.room) === -1) {
+      router.push("/chatroom/general");
+    }
     const sidebarIsOpen = ref(false);
     const { error, documents, isLoading } = getCollection("messages");
-    const router = useRouter();
     const { user } = getCurrentUser();
     watch(user, () => {
       if (user.value === null) {
         router.push({ name: "Welcome" });
       }
     });
-
     let formattedDocuments = computed(() => {
       if (documents.value) {
         return documents.value.filter(
@@ -47,9 +68,17 @@ export default {
       }
     });
 
-    const toggleSidebar = () => { sidebarIsOpen.value = !sidebarIsOpen.value }
+    const toggleSidebar = () => {
+      sidebarIsOpen.value = !sidebarIsOpen.value;
+    };
 
-    return { error, isLoading, formattedDocuments, sidebarIsOpen, toggleSidebar };
+    return {
+      error,
+      isLoading,
+      formattedDocuments,
+      sidebarIsOpen,
+      toggleSidebar,
+    };
   },
 };
 </script>
@@ -78,7 +107,7 @@ export default {
       top: 0;
       left: -100px;
       z-index: 999;
-      transition: all .3s linear;
+      transition: all 0.3s linear;
     }
 
     &.open {

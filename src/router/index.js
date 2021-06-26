@@ -30,6 +30,14 @@ const routes = [
     meta: {
       title: "Chatroom || RoomsHouse"
     }
+  }, 
+  {
+    path: "/:Error404(.*)",
+    name: "Error404",
+    meta: {
+      title: "Page Not Found || RoomsHouse"
+    },
+    component: () => import("../views/Error404.vue")
   }
 ]
 
