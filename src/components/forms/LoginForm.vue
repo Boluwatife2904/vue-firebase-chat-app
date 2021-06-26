@@ -2,7 +2,8 @@
   <form @submit.prevent="submitForm" class="auth-form">
     <div class="form-control">
       <label for="email">Email address</label>
-      <input type="email" name="email" id="email" v-model.trim="email" />
+      <input type="email" name="email" id="email" placeholder="johndoe@gmail.com" v-model.trim="email" />
+      <i class='bx bx-at icon'></i>
     </div>
     <div class="form-control">
       <label for="password">Password</label>
@@ -10,10 +11,12 @@
         type="password"
         name="password"
         id="password"
+        placeholder="6 or more characters"
         v-model.trim="password"
       />
+      <i class='bx bx-lock-open-alt icon'></i>
     </div>
-    <button type="submit">
+    <button type="submit" class="submit">
       <i class="bx bx-loader bx-spin bx-flip-horizontal" v-if="isLoading"></i>
       <span v-else>Login</span>
     </button>
@@ -48,23 +51,5 @@ export default {
 };
 </script>
 
-<style lang="scss">
-form {
-  button {
-    width: 100px;
-    height: 40px;
-    padding: 0;
-    background: #5c62f2;
-    color: #fff;
-    font-weight: bold;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    i {
-      font-size: 17px;
-    }
-  }
-}
+<style>
 </style>

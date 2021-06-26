@@ -6,12 +6,15 @@
         type="text"
         name="display"
         id="display"
+        placeholder="John Doe"
         v-model.trim="displayName"
       />
+      <i class='bx bx-user-circle icon' ></i>
     </div>
     <div class="form-control">
       <label for="email">Email address</label>
-      <input type="email" name="email" id="email" v-model.trim="email" />
+      <input type="email" name="email" id="email" placeholder="johndoe@gmail.com" v-model.trim="email" />
+      <i class='bx bx-at icon'></i>
     </div>
     <div class="form-control">
       <label for="password">Password</label>
@@ -19,12 +22,14 @@
         type="password"
         name="password"
         id="password"
+        placeholder="6 or more characters"
         v-model.trim="password"
       />
+      <i class='bx bx-lock-open-alt icon'></i>
     </div>
-    <button type="submit">
+    <button type="submit" class="submit">
       <i class="bx bx-loader bx-spin bx-flip-horizontal" v-if="isLoading"></i>
-      <span v-else>Signup</span>
+      <span v-else>Create an account</span>
     </button>
     <div v-if="error">
       <p class="error">{{ error }}</p>

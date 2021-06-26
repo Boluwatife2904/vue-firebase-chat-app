@@ -14,12 +14,6 @@ body {
   font-family: "Karla", sans-serif;
 }
 
-.container {
-  height: 100vh;
-  width: 100vw;
-  background: #fff;
-}
-
 /* ERROR TEXT */
 .error {
   color: #ff3f80;
@@ -31,28 +25,50 @@ body {
 
 /* LOGIN ANF SIGNUP FORM */
 .auth-form {
-  max-width: 450px;
-  width: 95%;
-  margin: 0 auto 40px;
+  max-width: 100%;
+  width: 100%;
 }
 
 .auth-form .form-control {
   margin-bottom: 20px;
+  position: relative;
+}
+
+.auth-form .form-control .icon {
+  position: absolute;
+  color: #999;
+  font-size: 20px;
+  bottom: 17px;
+  right: 15px;
 }
 
 .auth-form .form-control label {
   display: block;
   margin: 0 0 8px;
+  color: #3d4555;
 }
 
 .auth-form .form-control input {
   width: 100%;
-  padding: 12px 14px;
+  padding: 18px 50px 18px 14px;
   font: inherit;
   border-radius: 6px;
   border: 1px solid rgb(220, 220, 220);
   outline: none;
   color: #999;
+}
+
+.auth-form .submit {
+  width: 100%;
+  height: 60px;
+  padding: 0;
+  background: #5c62f2;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 /* END LOGIN AND SIGNUP FORM */
 
@@ -63,6 +79,6 @@ button {
   cursor: pointer;
 }
 
-button:focus{
+button:focus {
   outline: none;
 }
