@@ -43,9 +43,16 @@ body {
 }
 
 .auth-form .form-control label {
-  display: block;
   margin: 0 0 8px;
   color: #3d4555;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auth-form .form-control.invalid .form-error {
+  color: crimson;
+  font-size: 14px;
 }
 
 .auth-form .form-control input {
@@ -56,6 +63,10 @@ body {
   border: 1px solid rgb(220, 220, 220);
   outline: none;
   color: #999;
+}
+
+.auth-form .form-control.invalid input {
+  border: 1px solid crimson;
 }
 
 .auth-form .submit {

@@ -1,24 +1,36 @@
 <template>
   <form @submit.prevent="submitForm" class="auth-form">
-    <div class="form-control">
-      <label for="email">Email address</label>
+    <div class="form-control" :class="{ invalid: !!email.message }">
+      <label for="email">
+        <span>Email address</span>
+        <span v-if="!!email.message" class="form-error">{{
+          email.message
+        }}</span>
+      </label>
       <input
         type="email"
         name="email"
         id="email"
         placeholder="johndoe@gmail.com"
-        v-model.trim="email"
+        @focus="resetInput(email)"
+        v-model.trim="email.value"
       />
       <i class="bx bx-at icon"></i>
     </div>
-    <div class="form-control">
-      <label for="password">Password</label>
+    <div class="form-control" :class="{ invalid: !!password.message }">
+      <label for="password">
+        Password
+        <span v-if="!!password.message" class="form-error">{{
+          password.message
+        }}</span>
+      </label>
       <input
         type="password"
         name="password"
         id="password"
         placeholder="6 or more characters"
-        v-model.trim="password"
+        @focus="resetInput(password)"
+        v-model.trim="password.value"
       />
       <i class="bx bx-lock-open-alt icon"></i>
     </div>
@@ -37,7 +49,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import { firebase } from "../../firebase/config";
 import loginAction from "@/composables/loginaAction";
 export default {
@@ -45,26 +57,69 @@ export default {
   emits: ["proceed-to-chatroom"],
   setup(_, context) {
     const { error, isLoading, login } = loginAction();
-    const email = ref("");
-    const password = ref("");
+    const email = reactive({
+      value: "",
+      message: null,
+    });
+    const password = reactive({
+      value: "",
+      message: null,
+    });
+    const formIsValid = ref(true);
+
+    const resetInput = (input) => {
+      input.message = null;
+    };
+
+    const validateForm = () => {
+      formIsValid.value = true;
+      if (email.value === "") {
+        email.message = "Email address cannot be empty";
+        formIsValid.value = false;
+      }
+      if (password.value === "") {
+        password.message = "You need to create a password!";
+        formIsValid.value = false;
+      } else if (password.value.length < 6) {
+        password.message = "Must be greater than 6 characters";
+        formIsValid.value = false;
+      }
+    };
 
     const submitForm = async () => {
+      validateForm();
+      if (!formIsValid.value) {
+        return;
+      }
       await login(email.value, password.value);
       if (!error.value) {
         email.value = "";
         password.value = "";
         context.emit("proceed-to-chatroom");
+        error.value = null;
       }
     };
 
     const loginWithGoogle = async () => {
       var provider = new firebase.auth.GoogleAuthProvider();
-      await firebase.auth().signInWithPopup(provider).then(() => {
-        context.emit("proceed-to-chatroom");
-      });
+      await firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(() => {
+          context.emit("proceed-to-chatroom");
+          error.value = null;
+        });
     };
 
-    return { email, password, submitForm, error, isLoading, loginWithGoogle };
+    return {
+      email,
+      password,
+      submitForm,
+      error,
+      isLoading,
+      loginWithGoogle,
+      resetInput,
+    };
   },
 };
 </script>

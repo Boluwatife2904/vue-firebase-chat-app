@@ -1,35 +1,53 @@
 <template>
   <form @submit.prevent="submitForm" class="auth-form">
-    <div class="form-control">
-      <label for="display">Display Name</label>
+    <div class="form-control" :class="{ invalid: !!displayName.message }">
+      <label for="display">
+        <span>Display Name</span>
+        <span v-if="!!displayName.message" class="form-error">{{
+          displayName.message
+        }}</span>
+      </label>
       <input
         type="text"
         name="display"
         id="display"
         placeholder="John Doe"
-        v-model.trim="displayName"
+        @focus="resetInput(displayName)"
+        v-model.trim="displayName.value"
       />
       <i class="bx bx-user-circle icon"></i>
     </div>
-    <div class="form-control">
-      <label for="email">Email address</label>
+    <div class="form-control" :class="{ invalid: !!email.message }">
+      <label for="email">
+        <span>Email Address</span>
+        <span v-if="!!email.message" class="form-error">{{
+          email.message
+        }}</span>
+      </label>
       <input
         type="email"
         name="email"
         id="email"
         placeholder="johndoe@gmail.com"
-        v-model.trim="email"
+        @focus="resetInput(email)"
+        v-model.trim="email.value"
       />
       <i class="bx bx-at icon"></i>
     </div>
-    <div class="form-control">
-      <label for="password">Password</label>
+    <div class="form-control" :class="{ invalid: !!password.message }">
+      <label for="password">
+        <span>Password</span>
+        <span v-if="!!password.message" class="form-error">{{
+          password.message
+        }}</span>
+      </label>
       <input
         type="password"
         name="password"
         id="password"
         placeholder="6 or more characters"
-        v-model.trim="password"
+        @focus="resetInput(password)"
+        v-model.trim="password.value"
       />
       <i class="bx bx-lock-open-alt icon"></i>
     </div>
@@ -48,7 +66,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import { firebase } from "../../firebase/config";
 import signupAction from "@/composables/signupAction";
 
@@ -57,17 +75,55 @@ export default {
   emits: ["proceed-to-chatroom"],
   setup(_, context) {
     const { error, signup, isLoading } = signupAction();
-    const displayName = ref("");
-    const password = ref("");
-    const email = ref("");
+    const displayName = reactive({
+      value: "",
+      message: null,
+    });
+    const email = reactive({
+      value: "",
+      message: null,
+    });
+    const password = reactive({
+      value: "",
+      message: null,
+    });
+    const formIsValid = ref(true);
+
+    const resetInput = (input) => {
+      input.message = null;
+    };
+
+    const validateForm = () => {
+      formIsValid.value = true;
+      if (displayName.value === "") {
+        displayName.message = "Kindly provide a nickname";
+        formIsValid.value = false;
+      }
+      if (email.value === "") {
+        email.message = "Email address cannot be empty";
+        formIsValid.value = false;
+      }
+      if (password.value === "") {
+        password.message = "You need to create a password!";
+        formIsValid.value = false;
+      } else if (password.value.length < 6) {
+        password.message = "Must be greater than 6 characters";
+        formIsValid.value = false;
+      }
+    };
 
     const submitForm = async () => {
+      validateForm();
+      if (!formIsValid.value) {
+        return;
+      }
       await signup(email.value, password.value, displayName.value);
       if (!error.value) {
         displayName.value = "";
         password.value = "";
         email.value = "";
         context.emit("proceed-to-chatroom");
+        error.value = null;
       }
     };
 
@@ -78,10 +134,20 @@ export default {
         .signInWithPopup(provider)
         .then(() => {
           context.emit("proceed-to-chatroom");
+          error.value = null;
         });
     };
 
-    return { displayName, email, password, submitForm, error, isLoading, signupWithGoogle };
+    return {
+      displayName,
+      email,
+      password,
+      submitForm,
+      error,
+      isLoading,
+      signupWithGoogle,
+      resetInput,
+    };
   },
 };
 </script>
