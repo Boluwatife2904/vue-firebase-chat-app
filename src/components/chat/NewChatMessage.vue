@@ -83,12 +83,14 @@ form {
     font-weight: 500;
     transition: all 0.3s linear;
     width: 60px;
+    padding: 7px 0;
     display: flex;
     align-items: center;
     justify-content: center;
 
     i {
       font-size: 18px;
+      line-height: 1.5;
     }
 
     &:disabled {

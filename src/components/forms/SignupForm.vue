@@ -9,12 +9,18 @@
         placeholder="John Doe"
         v-model.trim="displayName"
       />
-      <i class='bx bx-user-circle icon' ></i>
+      <i class="bx bx-user-circle icon"></i>
     </div>
     <div class="form-control">
       <label for="email">Email address</label>
-      <input type="email" name="email" id="email" placeholder="johndoe@gmail.com" v-model.trim="email" />
-      <i class='bx bx-at icon'></i>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        placeholder="johndoe@gmail.com"
+        v-model.trim="email"
+      />
+      <i class="bx bx-at icon"></i>
     </div>
     <div class="form-control">
       <label for="password">Password</label>
@@ -25,11 +31,15 @@
         placeholder="6 or more characters"
         v-model.trim="password"
       />
-      <i class='bx bx-lock-open-alt icon'></i>
+      <i class="bx bx-lock-open-alt icon"></i>
     </div>
     <button type="submit" class="submit">
       <i class="bx bx-loader bx-spin bx-flip-horizontal" v-if="isLoading"></i>
       <span v-else>Create an account</span>
+    </button>
+    <button type="button" class="google-login" @click="signupWithGoogle">
+      <span class="icon"><i class="bx bxl-google"></i></span>
+      <span>Sign up with Google</span>
     </button>
     <div v-if="error">
       <p class="error">{{ error }}</p>
@@ -39,6 +49,7 @@
 
 <script>
 import { ref } from "vue";
+import { firebase } from "../../firebase/config";
 import signupAction from "@/composables/signupAction";
 
 export default {
@@ -56,11 +67,21 @@ export default {
         displayName.value = "";
         password.value = "";
         email.value = "";
-        context.emit("proceed-to-chatroom")
+        context.emit("proceed-to-chatroom");
       }
     };
 
-    return { displayName, email, password, submitForm, error, isLoading };
+    const signupWithGoogle = async () => {
+      var provider = new firebase.auth.GoogleAuthProvider();
+      await firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(() => {
+          context.emit("proceed-to-chatroom");
+        });
+    };
+
+    return { displayName, email, password, submitForm, error, isLoading, signupWithGoogle };
   },
 };
 </script>

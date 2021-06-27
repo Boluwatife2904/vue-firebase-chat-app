@@ -15,7 +15,11 @@
       </div>
     </div>
     <div class="right-column column">
-      <div class="right-content-wrapper">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="right-content-wrapper" :class="{ 'higher-spacing': loginMode }">
         <div class="header">
           <p>Start for free</p>
           <h3>{{ loginMode ? "Continue" : "Sign up" }} to RoomsHouse.</h3>
@@ -50,9 +54,13 @@ export default {
     const router = useRouter();
     const loginMode = ref(true);
 
-    const toggleMode = () => { loginMode.value = !loginMode.value };
+    const toggleMode = () => {
+      loginMode.value = !loginMode.value;
+    };
 
-    const proceedToChatroom = () => { router.replace({ name: "Chatroom", params: { room: "general" } })};
+    const proceedToChatroom = () => {
+      router.replace({ name: "Chatroom", params: { room: "general" } });
+    };
 
     return { loginMode, toggleMode, proceedToChatroom };
   },
@@ -122,11 +130,13 @@ export default {
 
   .right-column {
     background: #fff;
+    position: relative;
+    overflow: hidden;
 
     .right-content-wrapper {
       max-width: 500px;
       width: 100%;
-      margin: 100px auto 0;
+      margin: 50px auto 0;
 
       .header {
         margin-bottom: 30px;
@@ -151,6 +161,10 @@ export default {
           }
         }
       }
+
+      &.higher-spacing {
+        margin: 100px auto 0;
+      }
     }
   }
 }
@@ -163,5 +177,33 @@ export default {
   outline: none;
   border-bottom: none;
   font-weight: 600;
+}
+
+.circle {
+  border: 5px solid #5c62f2;
+  height: 110px;
+  width: 110px;
+  border-radius: 50%;
+  position: absolute;
+
+  &:nth-child(1) {
+    top: -50px;
+    left: -50px;
+  }
+
+  &:nth-child(2) {
+    right: -50px;
+    top: -50px;
+  }
+
+  &:nth-child(3) {
+    bottom: -50px;
+    left: -50px;
+  }
+
+  &:nth-child(4) {
+    right: -50px;
+    bottom: -50px;
+  }
 }
 </style>
