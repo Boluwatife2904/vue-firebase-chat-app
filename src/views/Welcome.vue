@@ -38,6 +38,12 @@
           <SignupForm v-else @proceed-to-chatroom="proceedToChatroom" />
         </div>
       </div>
+      <div class="forgot-password" v-if="loginMode">
+        <button @click="toggleForgotPasswordModal">Forgot Password?</button>
+      </div>
+      <teleport to="body">
+        <forgot-password :open="openModal" @close-modal="toggleForgotPasswordModal"></forgot-password>
+      </teleport>
     </div>
   </div>
 </template>
@@ -47,22 +53,28 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import LoginForm from "../components/forms/LoginForm.vue";
 import SignupForm from "../components/forms/SignupForm.vue";
+import ForgotPassword from '../components/modals/ForgotPassword.vue';
 export default {
-  components: { SignupForm, LoginForm },
+  components: { SignupForm, LoginForm, ForgotPassword },
   name: "Welcome",
   setup() {
     const router = useRouter();
     const loginMode = ref(true);
+    const openModal = ref(false);
 
     const toggleMode = () => {
       loginMode.value = !loginMode.value;
+    };
+
+    const toggleForgotPasswordModal = () => {
+      openModal.value = !openModal.value;
     };
 
     const proceedToChatroom = () => {
       router.replace({ name: "Chatroom", params: { room: "general" } });
     };
 
-    return { loginMode, toggleMode, proceedToChatroom };
+    return { loginMode, openModal, toggleMode, proceedToChatroom, toggleForgotPasswordModal };
   },
 };
 </script>
@@ -204,6 +216,17 @@ export default {
   &:nth-child(4) {
     right: -50px;
     bottom: -50px;
+  }
+}
+
+.forgot-password {
+  margin: 50px auto 0;
+
+  button {
+    display: block;
+    margin: 0 auto;
+    background: none;
+    color: #5c62f2;
   }
 }
 </style>
