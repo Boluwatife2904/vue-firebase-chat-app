@@ -78,7 +78,7 @@ export default {
         formIsValid.value = false;
       }
       if (password.value === "") {
-        password.message = "You need to create a password!";
+        password.message = "You need to enter your password!";
         formIsValid.value = false;
       } else if (password.value.length < 6) {
         password.message = "Must be greater than 6 characters";
