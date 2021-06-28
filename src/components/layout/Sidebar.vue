@@ -118,6 +118,10 @@ export default {
           text-align: center;
         }
 
+        @media screen and (max-width: 576px) {
+          text-align: left;
+        }
+
         &.router-link-active {
           color: #fff;
         }
@@ -131,6 +135,10 @@ export default {
 
           @media screen and (max-width: 994px) {
             display: none;
+          }
+
+          @media screen and (max-width: 576px) {
+            display: inline;
           }
         }
       }

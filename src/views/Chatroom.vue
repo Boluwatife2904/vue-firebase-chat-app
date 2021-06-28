@@ -96,7 +96,6 @@ export default {
     flex: 0 0 20%;
     max-width: 20%;
     overflow-y: auto;
-    // transition: all 0.3s linear;
 
     @media screen and (max-width: 994px) {
       flex: 0 0 10%;
@@ -108,8 +107,9 @@ export default {
       max-width: 100%;
       position: fixed;
       top: 0;
-      left: -100px;
+      left: -250px;
       z-index: 999;
+      width: 200px;
       transition: all 0.3s linear;
     }
 
