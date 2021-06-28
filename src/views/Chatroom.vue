@@ -60,6 +60,9 @@ export default {
         router.push({ name: "Welcome" });
       }
     });
+    watch(props, () => {
+      sidebarIsOpen.value = false;
+    })
     let formattedDocuments = computed(() => {
       if (documents.value) {
         return documents.value.filter(
