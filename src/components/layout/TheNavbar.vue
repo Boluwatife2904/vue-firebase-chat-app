@@ -1,7 +1,7 @@
 <template>
   <nav v-if="user">
     <div class="user-information">
-      <p>Welcome back, {{ user.displayName }}</p>
+      <p>{{ greeting }}, {{ user.displayName }}</p>
       <button class="logout" @click="logoutUser">
         <i class="bx bx-log-out"></i>Logout
       </button>
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { computed } from "vue";
 import logoutAction from "@/composables/logoutAction";
 import getCurrentUser from "@/composables/getCurrentUser";
 export default {
@@ -28,7 +29,20 @@ export default {
       context.emit("toggle-sidebar");
     };
 
-    return { error, logout, logoutUser, user, toggleSidebar };
+    const greeting = computed(() => {
+      const hours = new Date().getHours();
+      let message;
+      if (hours < 12) {
+        message = "Good Morning"
+      } else if (hours < 16) {
+        message = "Good afternoon"
+      } else {
+        message = "Good evening"
+      }
+      return message;
+    })
+
+    return { greeting, error, logout, logoutUser, user, toggleSidebar };
   },
 };
 </script>
