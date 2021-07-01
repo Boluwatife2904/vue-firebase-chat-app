@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar" :class="{ open }">
+  <div class="sidebar">
     <p>Available rooms</p>
     <ul>
       <li>
@@ -74,7 +74,6 @@
 <script>
 export default {
   name: "Sidebar",
-  props: ["open"],
 };
 </script>
 
@@ -105,56 +104,6 @@ export default {
 
     li {
       margin-bottom: 10px;
-
-      @media screen and (max-width: 576px) {
-        opacity: 0;
-        transform: translateX(-40px);
-        transition: all 0.3s linear;
-
-        &:nth-child(1) {
-          transition-delay: 0.2s;
-        }
-
-        &:nth-child(2) {
-          transition-delay: 0.3s;
-        }
-
-        &:nth-child(3) {
-          transition-delay: 0.4s;
-        }
-
-        &:nth-child(4) {
-          transition-delay: 0.5s;
-        }
-
-        &:nth-child(5) {
-          transition-delay: 0.6s;
-        }
-
-        &:nth-child(6) {
-          transition-delay: 0.7s;
-        }
-
-        &:nth-child(7) {
-          transition-delay: 0.8s;
-        }
-
-        &:nth-child(8) {
-          transition-delay: 0.9s;
-        }
-
-        &:nth-child(9) {
-          transition-delay: 1s;
-        }
-
-        &:nth-child(10) {
-          transition-delay: 1.1s;
-        }
-
-        &:nth-child(11) {
-          transition-delay: 1.2s;
-        }
-      }
 
       a {
         text-decoration: none;
@@ -192,15 +141,6 @@ export default {
             display: inline;
           }
         }
-      }
-    }
-  }
-
-  &.open {
-    ul {
-      li {
-        opacity: 1;
-        transform: translateX(0);
       }
     }
   }
