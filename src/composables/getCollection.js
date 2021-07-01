@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { ref, watchEffect } from "vue";
 import { formatDistanceToNow } from "date-fns";
 import { projectFirestore } from "../firebase/config";
 
@@ -12,7 +12,7 @@ const getCollection = (collection) => {
     .collection(collection)
     .orderBy("createdAt");
 
-  collectionRef.onSnapshot(
+  const unsub = collectionRef.onSnapshot(
     (snap) => {
       let results = [];
       snap.docs.forEach((doc) => {
@@ -31,6 +31,11 @@ const getCollection = (collection) => {
       isLoading.value = false;
     }
   );
+
+  watchEffect((onInvalidate) => {
+    // Unsubscribing frm previous collection when component is unmounted
+    onInvalidate(() => unsub());
+  })
 
   return { error, isLoading, documents };
 };
