@@ -3,10 +3,19 @@ import { projectAuth } from '../firebase/config'
 import Welcome from '../views/Welcome.vue';
 import Chatroom from '../views/Chatroom.vue';
 
-const requiresAuthentication = (to, from, next) => {
+const requiresAuthentication = (_, _2, next) => {
   let user = projectAuth.currentUser;
   if(!user) {
     next({ name: "Welcome" });
+  } else {
+    next();
+  }
+}
+
+const requiresNoAuthentication = (to, from, next) => {
+  let user = projectAuth.currentUser;
+  if(user) {
+    next({name : "Chatroom", params: { room: "general"}});
   } else {
     next();
   }
@@ -17,6 +26,7 @@ const routes = [
     path: '/',
     name: 'Welcome',
     component: Welcome,
+    beforeEnter: requiresNoAuthentication,
     meta: {
       title: "Welcome || RoomsHouse"
     }
