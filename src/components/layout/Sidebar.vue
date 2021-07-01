@@ -109,7 +109,7 @@ export default {
       @media screen and (max-width: 576px) {
         opacity: 0;
         transform: translateX(-40px);
-        transition: all 0.3s ease;
+        transition: all 0.3s linear;
 
         &:nth-child(1) {
           transition-delay: 0.2s;
@@ -163,7 +163,7 @@ export default {
         color: rgb(150, 150, 150);
         display: block;
         border-radius: 4px;
-        transition: all 0.3s ease;
+        transition: all 0.3s linear;
 
         @media screen and (max-width: 994px) {
           text-align: center;
