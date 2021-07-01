@@ -1,7 +1,7 @@
 <template>
   <div class="page-wrapper">
     <div class="sidebar-content" :class="{ open: sidebarIsOpen }">
-      <Sidebar />
+      <Sidebar :open="sidebarIsOpen" />
     </div>
     <div class="main-container">
       <TheNavbar @toggle-sidebar="toggleSidebar" />
@@ -110,7 +110,7 @@ export default {
       left: -250px;
       z-index: 999;
       width: 200px;
-      transition: all 0.3s linear;
+      transition: all 0.3s ease;
     }
 
     &.open {
@@ -121,7 +121,7 @@ export default {
   .main-container {
     flex: 0 0 80%;
     max-width: 80%;
-    transition: all 0.3s linear;
+    transition: all 0.3s ease;
 
     display: flex;
     flex-direction: column;
