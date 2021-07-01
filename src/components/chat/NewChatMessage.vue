@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="sendMessage">
+  <form @submit.prevent="sendMessage" autocomplete="off">
     <input
       type="text"
       name="message"
@@ -7,6 +7,7 @@
       placeholder="Type a message..."
       v-model.trim="text"
       @keypress.enter.prevent="sendMessage"
+      autocomplete="off"
     />
     <button type="submit" class="send-message" :disabled="text.length <= 0">
       <span v-if="isLoading">
