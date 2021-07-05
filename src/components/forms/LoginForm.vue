@@ -51,7 +51,7 @@
 <script>
 import { ref, reactive } from "vue";
 import { firebase } from "../../firebase/config";
-import loginAction from "@/composables/loginaAction";
+import loginAction from "@/composables/loginAction";
 export default {
   name: "LoginForm",
   emits: ["proceed-to-chatroom"],
